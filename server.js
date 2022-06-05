@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
 
@@ -20,7 +21,7 @@ const sess = {
     db: sequelize
   })
 };
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 app.use(session(sess));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
